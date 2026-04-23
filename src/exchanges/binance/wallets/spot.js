@@ -18,9 +18,8 @@ class SpotWallet {
       const response = await this.client.fetchTicker(symbol);
       const price = response.last;
       
-      // BUG: parseInt truncates decimal values
-      // This causes decimal-priced assets to lose precision
-      return parseInt(price);
+      // FIXED: Changed parseInt to parseFloat to preserve decimal values
+      return parseFloat(price);
     } catch (error) {
       throw new Error(`Failed to fetch spot price for ${symbol}: ${error.message}`);
     }
